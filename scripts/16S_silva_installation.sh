@@ -32,4 +32,9 @@ mv data/${TAXO_PREFIX}.acc_taxid seqid2taxid.map
 sed -e '/^>/!y/U/T/' "data/$FASTA_FILENAME" > library/silva.fna
 popd
 
-kraken2-build --db $KRAKEN2_DB_NAME --build --threads $KRAKEN2_THREAD_CT
+echo "Building with k-mer length $KRAKEN2_KMER_LEN and minimizer length $KRAKEN2_MINIMIZER_LEN"
+
+kraken2-build --db "$KRAKEN2_DB_NAME" --build --threads "$KRAKEN2_THREAD_CT" \
+    --kmer-len "$KRAKEN2_KMER_LEN" \
+    --minimizer-len "$KRAKEN2_MINIMIZER_LEN" \
+    --minimizer-spaces "$KRAKEN2_MINIMIZER_SPACES"
